@@ -9,9 +9,11 @@
   <body>
     <main>
       <h1>Pomodoro Timer</h1>
-      <button class="start-btn">Start</button>
-      <button class="pause-btn">Pause</button>
-      <button class="reset-btn">Reset</button>
+      <p id="mode-label" aria-live="polite">Focus</p>  
+      <div id="time-display">25:00</div>
+      <button id="toggle-button" type="button">Start</button>
+      <button id="reset-button" type="button">Reset</button>
+      <div id="session-count">Completed: 0</div>
     </main>
     <script type="module" src="/src/main.ts"></script>
   </body>
