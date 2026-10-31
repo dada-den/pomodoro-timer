@@ -28,4 +28,7 @@ export function render(state: TimerState): void {
     sessionCount.textContent = `Completed: ${state.completedFocusCount}`;
 
     document.body.dataset.mode = state.currentMode;
+
+    document.title = `${formatTime(state.remainingTime)} - ${MODE_LABELS[state.currentMode]}`;
+    console.log("render called", state.remainingTime);
 }

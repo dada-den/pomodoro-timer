@@ -39,3 +39,19 @@ setInterval(() => {
 render(state);
 
 
+function toggle(): void {
+    if (state.currentStatus === "running") {
+        return update(pause(state, Date.now()));
+    } else {
+        return update(start(state, Date.now()));
+    }
+}
+
+document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        e.preventDefault();
+        toggle();
+    };
+});
+
+
