@@ -2,6 +2,8 @@ import { start, pause, reset, tick } from "./timer";
 import type { TimerState } from "./types";
 import { render } from "./render";
 import { durations } from "./config";
+import { saveCount, loadCount } from "./storage";
+import { playSessionEnd } from "./sound";
 import "./style.css";
 
 let state: TimerState = {
@@ -9,12 +11,20 @@ let state: TimerState = {
     currentStatus: "idle",
     remainingTime: durations["focus"],
     endTimestamp: null,
-    completedFocusCount: 0
+    completedFocusCount: loadCount()
 };
 
 function update(newState: TimerState): void {
+    const countChanged = newState.completedFocusCount !== state.completedFocusCount;
+    const sessionEnded = newState.currentMode !== state.currentMode;
     state = newState;
     render(state);
+    if (countChanged) {
+        saveCount(state.completedFocusCount);
+    }
+    if (sessionEnded) {
+        playSessionEnd();
+    }
 }   
 
 const toggleBtn = document.getElementById("toggle-button");
